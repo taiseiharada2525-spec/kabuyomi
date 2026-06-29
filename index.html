@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, viewport-fit=cover" />
+  <title>カブヨミ｜日本株ニュースをスマホで素早くチェック</title>
+  <meta name="description" content="トヨタ・ソニー・ソフトバンクなど主要日本株の最新ニュースを銘柄別に整理。ウォッチリストに登録して関連ニュースだけを素早くチェックできる無料PWAアプリ。" />
+  <meta name="keywords" content="日本株,株ニュース,銘柄,株価,東証,TOPIX,日経平均,個人投資家,株アプリ" />
+  <meta name="author" content="カブヨミ" />
+  <meta property="og:title" content="カブヨミ｜日本株ニュースをスマホで素早くチェック" />
+  <meta property="og:description" content="気になる銘柄を登録するだけ。関連ニュースをAIが自動でまとめて表示する無料の日本株ニュースアプリ。" />
+  <meta property="og:type" content="website" />
+  <meta property="og:locale" content="ja_JP" />
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="カブヨミ｜日本株ニュース" />
+  <meta name="twitter:description" content="気になる銘柄を登録するだけ。関連ニュースを自動でまとめて表示する無料PWAアプリ。" />
+  <link rel="canonical" href="https://kabuyomi.vercel.app/" />
+
+  <!-- PWA / iOS ホーム画面アプリ対応 -->
+  <link rel="manifest" href="manifest.json" />
+  <meta name="theme-color" content="#0e1116" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="カブヨミ" />
+  <link rel="apple-touch-icon" href="icons/apple-touch-icon.png" />
+  <link rel="icon" type="image/png" href="icons/favicon-32.png" />
+
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="app">
+    <!-- 上部バー（画面ごとに切替）-->
+    <header class="topbar">
+      <div class="topbar-inner">
+        <div class="logo"><span class="mark">株</span><span id="viewTitle">最新ニュース</span></div>
+        <button id="refreshBtn" class="icon-btn" aria-label="更新">⟳</button>
+      </div>
+      <!-- 指数ティッカー（横スクロール）-->
+      <div id="ticker" class="ticker"></div>
+      <!-- カテゴリチップ（ニュース画面のみ）-->
+      <div id="chips" class="chips"></div>
+    </header>
+
+    <!-- メインビュー領域 -->
+    <main id="screen" class="screen"></main>
+
+    <!-- 下部タブバー（iOS風）-->
+    <nav class="tabbar" id="tabbar">
+      <button class="tab-btn active" data-view="news">
+        <span class="ic">📰</span><span class="lb">ニュース</span>
+      </button>
+      <button class="tab-btn" data-view="mine">
+        <span class="ic">⭐</span><span class="lb">マイ</span>
+        <span class="tab-badge" id="mineBadge" hidden></span>
+      </button>
+      <button class="tab-btn" data-view="stocks">
+        <span class="ic">🔍</span><span class="lb">銘柄登録</span>
+      </button>
+      <button class="tab-btn" data-view="market">
+        <span class="ic">📊</span><span class="lb">市場</span>
+      </button>
+    </nav>
+  </div>
+
+  <!-- ニュース詳細ボトムシート -->
+  <div id="sheetBackdrop" class="sheet-backdrop" hidden>
+    <div id="sheet" class="sheet" role="dialog" aria-modal="true">
+      <div class="sheet-handle"></div>
+      <div id="sheetBody" class="sheet-body"></div>
+    </div>
+  </div>
+
+  <!-- トースト -->
+  <div id="toast" class="toast" hidden></div>
+
+  <!-- フッター -->
+  <footer style="text-align:center;padding:12px 0 80px;font-size:11px;color:#555;">
+    <a href="privacy.html" style="color:#666;text-decoration:none;margin:0 8px;">プライバシーポリシー</a>
+    <a href="disclaimer.html" style="color:#666;text-decoration:none;margin:0 8px;">免責事項</a>
+    <a href="contact.html" style="color:#666;text-decoration:none;margin:0 8px;">お問い合わせ</a>
+  </footer>
+
+  <script src="data.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
